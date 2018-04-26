@@ -22,6 +22,9 @@ RATE = 44100    # Hz
 # Duty cycle change delay for LED test
 DC_CHANGE_DELAY = 0.005    # seconds
 
+# Starting maximum volume
+max_rms = 1
+
 
 def main():
     """Main function for rpi-volume-led."""
@@ -39,7 +42,6 @@ def main():
         sys.exit(0)
 
     # Setup PyAudio stuff
-    max_rms = 1
     p = pyaudio.PyAudio()
 
     # Setup GPIO stuff
