@@ -31,10 +31,6 @@ def main():
     # Get runtime arguments
     runtime_args = parse_runtime_args()
 
-    if runtime_args.test_led or not runtime_args.test_pyaudio:
-        # Import stuff for the Raspberry PI GPIO
-        import RPi.GPIO as GPIO
-
     # Pulse the LED if we're testing that
     if runtime_args.test_led:
         # Pulse the LED a few times
@@ -47,6 +43,7 @@ def main():
     # Setup GPIO stuff
     if not runtime_args.test_pyaudio:
         # Setup the GPIO pin
+        import RPi.GPIO as GPIO
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(runtime_args.pin_number, GPIO.OUT)
 
@@ -106,6 +103,7 @@ def pulse_LED(repititions, pin_number, silent=False):
         silent: A boolean determining whether to supress output.
     """
     # Setup the GPIO pin
+    import RPi.GPIO as GPIO
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(pin_number, GPIO.OUT)
 
