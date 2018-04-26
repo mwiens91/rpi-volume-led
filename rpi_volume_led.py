@@ -22,7 +22,7 @@ RATE = 44100    # Hz
 # Duty cycle change delay for LED test
 DC_CHANGE_DELAY = 0.005    # seconds
 
-# Starting maximum volume
+# Starting maximum volume - updated as a global variable later
 max_rms = 1
 
 
