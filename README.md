@@ -32,10 +32,11 @@ will run on any machine.
 
 ## Hooking up the LED
 
-Wire the breadboard as shown below. Make sure that the longer end of the LED is
-in the same row as the resistor. The resistor should be around 270 ohms.
-In the left column, starting from the bottom, the thrid pin is ground
-and the sixth pin is identified as pin 12 from within the program.
+Wire up a breadboard as shown below, making sure that the longer end of
+the LED is in the same row as the resistor (which should be around 270
+ohms).  In the left column of the RPi pins, starting from the bottom,
+the third pin is ground and the sixth pin powers the LED, and is
+identified as pin 12 from within the program.
 
 ![Breadboard Wiring](https://i.imgur.com/viCKkxp.jpg)
 
