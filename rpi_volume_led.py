@@ -48,10 +48,10 @@ def main():
     if not runtime_args.test_pyaudio:
         # Setup the GPIO pin
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(pin_number, GPIO.OUT)
+        GPIO.setup(runtime_args.pin_number, GPIO.OUT)
 
         # And use pulse width modulation
-        pwm = GPIO.PWM(pin_number, 100) # pin number, frequency
+        pwm = GPIO.PWM(runtime_args.pin_number, 100) # pin number, frequency
         pwm.start(0)
 
     def callback(data, frame_count, time_info, status):
@@ -79,7 +79,7 @@ def main():
                     rate=RATE,
                     input=True,
                     output=False,
-                    frames_per_buffer=FRAMES_PER_BUFFFER,
+                    frames_per_buffer=FRAMES_PER_BUFFER,
                     stream_callback=callback)
 
     # Exit when user tells us to
