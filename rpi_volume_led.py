@@ -83,7 +83,7 @@ def main():
                     stream_callback=callback)
 
     # Exit when user tells us to
-    input("-" * 5 + " hit enter anytime to exit " + "-" * 5)
+    input("\n" + "-" * 5 + " hit enter anytime to exit " + "-" * 5 + "\n")
 
     # Clean up the audio stream
     stream.stop_stream()
