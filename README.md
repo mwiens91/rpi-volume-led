@@ -32,7 +32,10 @@ will run on any machine.
 
 ## Hooking up the LED
 
-Detailed instructions here ...
+Wire the breadboard as shown below. Make sure that the longer end of the LED is
+in the same row as the resistor. The resistor should be around 270 ohms.
+
+![Breadboard Wiring](https://i.imgur.com/ZAfSl3F.jpg)
 
 To test that the LED is properly connected, run
 
