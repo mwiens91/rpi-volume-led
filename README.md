@@ -1,8 +1,9 @@
 # rpi-volume-led
 
-Light up an LED with your Raspberry Pi's volume! We (Tyler Trinh + Matt Wiens)
-used a Raspberry Pi (RPi) 3 model B, with Ubuntu MATE running as the OS. Likely
-this will work on older (and newer, once they're out) RPis, too.
+Light up an LED with your Raspberry Pi's audio output! We (Tyler Trinh +
+Matt Wiens) used a Raspberry Pi (RPi) 3 model B, with Ubuntu MATE
+running as the OS. Likely this will work on older (and newer, once
+they're out) RPis, too.
 
 ## Audio processing
 
