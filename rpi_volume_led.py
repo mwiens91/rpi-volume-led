@@ -125,6 +125,7 @@ def pulse_LED(repititions, pin_numbers, silent=False):
         # And use pulse width modulation
         pwm = GPIO.PWM(pin_number, 100) # pin number, frequency
         pwm.start(0)
+        pwms.append(pwm)
 
     # Pulse
     for repitition in range(repititions):
