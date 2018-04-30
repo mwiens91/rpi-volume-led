@@ -14,7 +14,7 @@ VERSION = "0.0.1"
 DESCRIPTION = "light up an LED with sound on your Raspberry Pi!"
 
 # Audio stream settings
-FRAMES_PER_BUFFER = 1024
+FRAMES_PER_BUFFER = 2048
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100    # Hz
