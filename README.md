@@ -67,3 +67,8 @@ sudo ./rpi_volume_led
 ```
 
 and hit `enter` whenever you're done to tell the program to clean up and exit.
+
+## See also
+
+[rpi-led-lightshow](https://github.com/mwiens91/rpi-led-lightshow),
+which is an expanded version of this project.
