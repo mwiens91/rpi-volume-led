@@ -33,8 +33,8 @@ def main():
 
     # Pulse the LED if we're testing that
     if runtime_args.test_led:
-        # Pulse the LED a few times
-        pulse_LED(7, runtime_args.pin_number, runtime_args.silent)
+        # Pulse the LED a few (seven) times
+        pulse_LED(7, runtime_args.pin_numbers, runtime_args.silent)
         sys.exit(0)
 
     # Setup PyAudio stuff
@@ -42,14 +42,20 @@ def main():
 
     # Setup GPIO stuff
     if not runtime_args.test_pyaudio:
-        # Setup the GPIO pin
+        # Setup the GPIO pins
         import RPi.GPIO as GPIO
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(runtime_args.pin_number, GPIO.OUT)
 
-        # And use pulse width modulation
-        pwm = GPIO.PWM(runtime_args.pin_number, 100) # pin number, frequency
-        pwm.start(0)
+        # List of Pulse Width Modulators
+        pwms = []
+
+        for pin_number in runtime_args.pin_numbers:
+            GPIO.setup(pin_number, GPIO.OUT)
+
+            # And use pulse width modulation
+            pwm = GPIO.PWM(pin_number, 100) # pin number, frequency
+            pwm.start(0)
+            pwms.append(pwm)
 
     def callback(data, frame_count, time_info, status):
         """Callback function to process sound."""
@@ -62,7 +68,8 @@ def main():
 
         # Change the duty cycle
         if not runtime_args.test_pyaudio:
-            pwm.ChangeDutyCycle(dc)
+            for pwm in pwms:
+                pwm.ChangeDutyCycle(dc)
 
         # Print some info
         if not runtime_args.silent:
@@ -89,27 +96,35 @@ def main():
 
     # Clean up the Raspberry Pi GPIO
     if not runtime_args.test_pyaudio:
-        pwm.stop()
+        for pwm in pwms:
+            pwm.stop()
+
         GPIO.cleanup()
 
 
-def pulse_LED(repititions, pin_number, silent=False):
+def pulse_LED(repititions, pin_numbers, silent=False):
     """Pulse an LED connected to a RPi a few times.
 
     Args:
         repititions: An integer number of times an LED will be pulsed.
-        pin_number: An integer specifying which GPIO pin will be used on
-            the Raspberry Pi.
+        pin_numbers: A list of integers specifying which GPIO pins will
+            be used on the Raspberry Pi.
         silent: A boolean determining whether to supress output.
     """
-    # Setup the GPIO pin
+    # Setup the GPIO pins
     import RPi.GPIO as GPIO
     GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(pin_number, GPIO.OUT)
 
-    # And use pulse width modulation
-    pwm = GPIO.PWM(pin_number, 100) # pin number, frequency
-    pwm.start(0)
+    # List of Pulse Width Modulators
+    pwms = []
+
+    # Setup each pin
+    for pin_number in pin_numbers:
+        GPIO.setup(pin_number, GPIO.OUT)
+
+        # And use pulse width modulation
+        pwm = GPIO.PWM(pin_number, 100) # pin number, frequency
+        pwm.start(0)
 
     # Pulse
     for repitition in range(repititions):
@@ -117,17 +132,23 @@ def pulse_LED(repititions, pin_number, silent=False):
             if not silent:
                 print("dc = %s" % dc)
 
-            pwm.ChangeDutyCycle(dc)
+            for pwm in pwms:
+                pwm.ChangeDutyCycle(dc)
+
             time.sleep(DC_CHANGE_DELAY)
         for dc in range(100, -1, -1):
             if not silent:
                 print("dc = %s" % dc)
 
-            pwm.ChangeDutyCycle(dc)
+            for pwm in pwms:
+                pwm.ChangeDutyCycle(dc)
+
             time.sleep(DC_CHANGE_DELAY)
 
     # Cleanup the Raspberry Pi GPIO
-    pwm.stop()
+    for pwm in pwms:
+        pwm.stop()
+
     GPIO.cleanup()
 
 
@@ -143,10 +164,10 @@ def parse_runtime_args():
             prog=NAME,
             description="%(prog)s - " + DESCRIPTION,)
     parser.add_argument(
-            "-p", "--pin-number",
-            type=int,
-            default=12,
-            help="which GPIO pin to use",)
+            "-p", "--pin-numbers",
+            type=list,
+            default=[12,],
+            help="which GPIO pins to use",)
     parser.add_argument(
             "-s", "--silent",
             help="don't output any information",

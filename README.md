@@ -56,6 +56,8 @@ the `-p` option:
 sudo ./rpi_volume_led --test-led -p 18
 ```
 
+You can also specify multiple pins this way.
+
 ## Running it
 
 To run the program normally run
