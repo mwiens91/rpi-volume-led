@@ -167,7 +167,7 @@ def parse_runtime_args():
             "-p", "--pin-numbers",
             type=int,
             nargs='+',
-            default=12,
+            default=[12],
             help="which GPIO pins to use",)
     parser.add_argument(
             "-s", "--silent",
