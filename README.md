@@ -1,3 +1,5 @@
+![Python version](https://img.shields.io/badge/python-3-blue.svg)
+
 # rpi-volume-led
 
 Light up an LED with your Raspberry Pi's audio output! We ([Tyler
